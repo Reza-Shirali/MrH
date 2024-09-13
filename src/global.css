@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "iran";
+  src: url("./assets/fonts/IRANSans\(FaNum\).ttf");
+}
+@font-face {
+  font-family: "iran-me";
+  src: url("./assets/fonts/IRANSans\(FaNum\)_Medium.ttf");
+}
+@font-face {
+  font-family: "iran-bo";
+  src: url("./assets/fonts/IRANSans\(FaNum\)_Bold.ttf");
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+*,
+*::after,
+*::before {
+  block-size: inherit;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "iran";
+  font-size: 1.6rem;
+  padding: 4rem;
+  min-height: 100vh;
+  max-width: 120rem;
+  margin: 0 auto;
+}
