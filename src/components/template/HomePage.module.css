@@ -1,0 +1,31 @@
+.container__title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+.container__title h2 {
+  position: relative;
+  color: var(--text-color);
+  text-align: center;
+  z-index: 12;
+  font-size: 2.4rem;
+}
+.title {
+  position: absolute;
+  color: gray;
+  text-align: center;
+  transform: translateY(-50%) translateX(52%);
+  top: 40%;
+  opacity: 0.5;
+  width: 100vw;
+  filter: blur(0.5rem);
+  -webkit-filter: blur(0.5rem);
+  font-size: 8rem;
+  -webkit-transform: translateY(-50%) translateX(52%);
+  -moz-transform: translateY(-50%) translateX(52%);
+  -ms-transform: translateY(-50%) translateX(52%);
+  -o-transform: translateY(-50%) translateX(52%);
+}
