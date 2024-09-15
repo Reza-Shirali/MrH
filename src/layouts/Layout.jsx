@@ -51,16 +51,16 @@ function Layout({ children }) {
     <>
       <header className={styles.header}>
         <div className={styles.header__right}>
-          <Link to="/shopping-card" className={styles.shopping__basket}>
-            <SlBasket className={styles.icon} />
-            <span>سبد خرید</span>
-          </Link>
           <div className={styles.user__account}>
             <Link to="/account" className={styles.user__account}>
               <FaUser className={styles.icon} />
               <span>حساب کاربری</span>
             </Link>
           </div>
+          <Link to="/shopping-card" className={styles.shopping__basket}>
+            <SlBasket className={styles.icon} />
+            <span>سبد خرید</span>
+          </Link>
         </div>
         <Link to="/" className={styles.header__center}>
           <img src={logo} className={styles.logo} alt="Website Logo" />

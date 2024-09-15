@@ -8,13 +8,15 @@ import AboutUs from "./components/template/AboutUs";
 import Articles from "./components/template/Articles";
 import Trems from "./components/template/Trems";
 import Store from "./components/template/Store";
-import Products from "./components/template/Products"
-import ContactUs from "./components/template/ContactUs"
+import Products from "./components/template/Products";
+import ContactUs from "./components/template/ContactUs";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Layout>
+        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/account" element={<Account />} />
