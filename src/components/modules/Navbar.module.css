@@ -9,6 +9,7 @@
   align-items: center;
   gap: 1.4rem;
   cursor: pointer;
+  text-decoration: none;
 }
 .icon__navbar {
   color: var(--text-color);
@@ -20,7 +21,7 @@
   color: var(--text-color);
   font-size: 2rem;
 }
-.navbar__titleEn{
-    color: #f9f9f9;
-    font-size: 1.2rem;
+.navbar__titleEn {
+  color: #f9f9f9;
+  font-size: 1.2rem;
 }
