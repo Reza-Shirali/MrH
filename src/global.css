@@ -1,19 +1,19 @@
-@font-face {
-  font-family: "iran";
-  src: url("./assets/fonts/IRANSans\(FaNum\).ttf");
+:root {
+  --text-color: #33ebec;
 }
 @font-face {
-  font-family: "iran-me";
-  src: url("./assets/fonts/IRANSans\(FaNum\)_Medium.ttf");
+  font-family: "ka";
+  src: url("./assets/fonts/ka.ttf");
 }
 @font-face {
-  font-family: "iran-bo";
-  src: url("./assets/fonts/IRANSans\(FaNum\)_Bold.ttf");
+  font-family: "ka-bo";
+  src: url("./assets/fonts/kaBo.ttf");
 }
 
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  position: relative;
 }
 *,
 *::after,
@@ -23,10 +23,9 @@ html {
   margin: 0;
 }
 body {
-  font-family: "iran";
+  font-family: "ka";
   font-size: 1.6rem;
-  padding: 4rem;
   min-height: 100vh;
-  max-width: 120rem;
   margin: 0 auto;
+  background-color: #17141f;
 }

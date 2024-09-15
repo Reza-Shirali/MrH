@@ -1,0 +1,26 @@
+.wrapper__navBar {
+  display: flex;
+  gap: 3rem;
+  padding: 1rem;
+}
+.navbar__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  cursor: pointer;
+}
+.icon__navbar {
+  color: var(--text-color);
+  font-size: 3rem;
+  filter: drop-shadow(2px 2px 7px #2df0e5);
+  -webkit-filter: drop-shadow(2px 2px 7px #2df0e5);
+}
+.navbar__titleFa {
+  color: var(--text-color);
+  font-size: 2rem;
+}
+.navbar__titleEn{
+    color: #f9f9f9;
+    font-size: 1.2rem;
+}
