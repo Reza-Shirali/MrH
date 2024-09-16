@@ -1,9 +1,10 @@
 import React from "react";
 
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
-  Navigation,
-  Pagination,
+    Navigation,
+    Pagination,
   Scrollbar,
   A11y,
   Autoplay,
@@ -14,23 +15,24 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
-function Banner({ imageBanner }) {
+import styles from "../template/ProductList.module.css"
+function ProductList({ imageProducts }) {
   return (
     <>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
-        slidesPerView={1}
+        slidesPerView={3}
         navigation
         autoplay={true}
         pagination={{ clickable: true }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        {imageBanner.map((image) => {
+        {imageProducts.map((image) => {
           return (
             <SwiperSlide key={image.id}>
-              <img src={image.img} alt="imageBanner" />
+              <img src={image.img} className={styles.image__product_title} />
             </SwiperSlide>
           );
         })}
@@ -39,4 +41,4 @@ function Banner({ imageBanner }) {
   );
 }
 
-export default Banner;
+export default ProductList;

@@ -11,12 +11,10 @@ import Store from "./components/template/Store";
 import Products from "./components/template/Products";
 import ContactUs from "./components/template/ContactUs";
 
-
 function App() {
   return (
     <BrowserRouter>
       <Layout>
-        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/account" element={<Account />} />
