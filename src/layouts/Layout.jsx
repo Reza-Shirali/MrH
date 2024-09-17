@@ -26,7 +26,12 @@ function Layout({ children }) {
       titleEn: "STORE",
       icon: <BsFillBasket2Fill />,
     },
-    { id: 3, titleFa: "محصولات", titleEn: "PRODUCTS", icon: <img src={logoProduct} /> },
+    {
+      id: 3,
+      titleFa: "محصولات",
+      titleEn: "PRODUCTS",
+      icon: <img src={logoProduct} />,
+    },
     {
       id: 4,
       titleFa: "تماس با ما",
@@ -44,7 +49,7 @@ function Layout({ children }) {
       id: 7,
       titleFa: "قوانین و مقررات",
       titleEn: "TERMS AND CONDITIONS",
-      icon: <img src={hammer}/>,
+      icon: <img src={hammer} />,
     },
   ];
   return (

@@ -1,10 +1,11 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
-    Navigation,
-    Pagination,
+  Navigation,
+  Pagination,
   Scrollbar,
   A11y,
   Autoplay,
@@ -15,8 +16,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
-import styles from "../template/ProductList.module.css"
+import styles from "../template/ProductList.module.css";
+
 function ProductList({ imageProducts }) {
+  const displayProducts = imageProducts.length > 0 ? imageProducts : products;
+
   return (
     <>
       <Swiper
@@ -29,13 +33,17 @@ function ProductList({ imageProducts }) {
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        {imageProducts.map((image) => {
-          return (
-            <SwiperSlide key={image.id}>
-              <img src={image.img} className={styles.image__product_title} />
-            </SwiperSlide>
-          );
-        })}
+        {displayProducts.map((image) => (
+          <SwiperSlide key={image.id} className={styles.wrapper__products}>
+            <Link to="/products">
+              <img
+                src={image.img}
+                className={styles.image__product_title}
+                alt={image.title}
+              />
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

@@ -1,3 +1,9 @@
 .image__product_title {
   width: 35rem;
 }
+.wrapper__products{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}

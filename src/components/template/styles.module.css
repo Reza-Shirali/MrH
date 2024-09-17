@@ -1,0 +1,13 @@
+.container{
+    width: 160rem;
+    margin: 0 auto;
+    color: #fff;
+}
+.image__product_title {
+  width: 20rem;
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
