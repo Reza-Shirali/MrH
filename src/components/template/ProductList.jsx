@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -32,16 +31,19 @@ function ProductList({ imageProducts }) {
         pagination={{ clickable: true }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
+        className={styles.swiper_wrapper}
       >
         {displayProducts.map((image) => (
           <SwiperSlide key={image.id} className={styles.wrapper__products}>
-            <Link to="/products">
+            <Link to="/products" className={styles.link__product_list}>
               <img
                 src={image.img}
                 className={styles.image__product_title}
                 alt={image.title}
               />
             </Link>
+              <p className={styles.image__caption}>{image.title}</p>
+              <Link to="/products" className={styles.link__product_list}><span>مشاهده بیشتر</span></Link>
           </SwiperSlide>
         ))}
       </Swiper>
