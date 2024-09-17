@@ -31,18 +31,23 @@ function ProductsPage() {
                 />
                 <p>{product.name}</p>
                 <div className={styles.product__info}>
-                  <div className={styles.add__product}>
-                    <BsCart />
+                  <div>
+                    {product.features && product.features.length > 0 ? (
+                      <div className={styles.add__product}>
+                        <BsCart />
+                      </div>
+                    ) : null}
                   </div>
                   <div className={styles.show__product}>
                     <FaRegEye />
                   </div>
                   <div className={styles.product__price}>
                     <span>
-                      {Number(product.features[0].price).toLocaleString(
-                        "fa-IR"
-                      )}{" "}
-                      تومان
+                      {product.features && product.features.length > 0
+                        ? Number(product.features[0].price).toLocaleString(
+                            "fa-IR"
+                          ) + " تومان"
+                        : "ناموجود"}
                     </span>
                   </div>
                 </div>
