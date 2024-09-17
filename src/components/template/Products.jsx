@@ -10,7 +10,7 @@ import { FaRegEye } from "react-icons/fa";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
-
+  console.log(products);
   useEffect(() => {
     axios.get(REACT_APP_API_URL).then((res) => {
       setProducts(res.data.data.products.data);
@@ -37,7 +37,14 @@ function ProductsPage() {
                   <div className={styles.show__product}>
                     <FaRegEye />
                   </div>
-                  <div className={styles.product__price}>5000</div>
+                  <div className={styles.product__price}>
+                    <span>
+                      {Number(product.features[0].price).toLocaleString(
+                        "fa-IR"
+                      )}{" "}
+                      تومان
+                    </span>
+                  </div>
                 </div>
               </li>
             ))
