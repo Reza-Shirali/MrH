@@ -1,0 +1,98 @@
+.container {
+  margin-top: 8rem;
+}
+.container__products {
+  width: 160rem;
+  margin: 0 auto;
+  color: #fff;
+}
+.product {
+  background-color: #201c2a;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  margin-bottom: 2rem;
+  width: 35rem;
+  align-items: center;
+  border-radius: 0.8rem;
+  -webkit-border-radius: 0.8rem;
+  -moz-border-radius: 0.8rem;
+  -ms-border-radius: 0.8rem;
+  -o-border-radius: 0.8rem;
+  text-align: center;
+  transition: all 250ms ease-in 20ms;
+  -webkit-transition: all 250ms ease-in 20ms;
+  -moz-transition: all 250ms ease-in 20ms;
+  -ms-transition: all 250ms ease-in 20ms;
+  -o-transition: all 250ms ease-in 20ms;
+  border: 0.1rem solid #201c2a;
+  cursor: pointer;
+}
+.product:hover {
+  border: 0.1rem solid var(--text-color);
+  transform: translateY(-1.1rem);
+  -webkit-transform: translateY(-1.1rem);
+  -moz-transform: translateY(-1.1rem);
+  -ms-transform: translateY(-1.1rem);
+  -o-transform: translateY(-1.1rem);
+}
+.product p {
+  margin-top: 2rem;
+  font-weight: 900;
+  width: 30rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #cbcacb;
+}
+.image__product_title {
+  max-height: 28rem;
+  border-radius: 0.4rem;
+  -webkit-border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  -ms-border-radius: 0.4rem;
+  -o-border-radius: 0.4rem;
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+.product__info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.add__product,
+.show__product {
+  color: var(--text-color);
+  font-size: 2.5rem;
+  border: 0.1rem solid var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  -webkit-border-radius: 0.6rem;
+  -moz-border-radius: 0.6rem;
+  -ms-border-radius: 0.6rem;
+  -o-border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 250ms ease-in 20ms;
+  -webkit-transition: all 250ms ease-in 20ms;
+  -moz-transition: all 250ms ease-in 20ms;
+  -ms-transition: all 250ms ease-in 20ms;
+  -o-transition: all 250ms ease-in 20ms;
+}
+.add__product:hover,
+.show__product:hover {
+  background-color: var(--text-color);
+  color: #000;
+}
+.product__price{
+  color: var(--text-color);
+  font-size: 1.8rem;
+}
