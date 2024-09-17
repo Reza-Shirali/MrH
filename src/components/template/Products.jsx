@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { REACT_APP_API_URL } from "../../services/apiData.js";
+import CircleLoader from "react-spinners/CircleLoader";
 
 import styles from "../template/product.module.css";
 
@@ -36,14 +37,21 @@ function ProductsPage() {
                   <div className={styles.show__product}>
                     <FaRegEye />
                   </div>
-                  <div className={styles.product__price}>
-                    5000
-                  </div>
+                  <div className={styles.product__price}>5000</div>
                 </div>
               </li>
             ))
           ) : (
-            <li>No products available</li>
+            <div className={styles.loading}>
+              <CircleLoader
+                color="#33ebec"
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+                className={styles.loader}
+              />
+              <span>در حال بارگذاری...</span>
+            </div>
           )}
         </ul>
       </div>

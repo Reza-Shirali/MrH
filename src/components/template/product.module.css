@@ -96,3 +96,19 @@
   color: var(--text-color);
   font-size: 1.8rem;
 }
+.loading{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.loading span{
+  margin-top: 4.5rem;
+  color: var(--text-color);
+}
+.loader{
+  margin-bottom: 1.5rem;
+}
