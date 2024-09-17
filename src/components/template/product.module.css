@@ -27,6 +27,18 @@
   -o-transition: all 250ms ease-in 20ms;
   border: 0.1rem solid #201c2a;
   cursor: pointer;
+  position: relative;
+}
+.non_existent {
+  position: absolute;
+  top: 40%;
+  background-color: hsla(0, 0%, 100%, 0.788235294117647);
+  box-shadow: -.1rem .1rem .5rem #cdcdcd;
+  width: 100%;
+  padding: 2.1rem 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #000;
 }
 .product:hover {
   border: 0.1rem solid var(--text-color);
@@ -92,11 +104,11 @@
   background-color: var(--text-color);
   color: #000;
 }
-.product__price{
+.product__price {
   color: var(--text-color);
   font-size: 1.8rem;
 }
-.loading{
+.loading {
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -105,10 +117,10 @@
   min-height: 100vh;
   flex-direction: column;
 }
-.loading span{
+.loading span {
   margin-top: 4.5rem;
   color: var(--text-color);
 }
-.loader{
+.loader {
   margin-bottom: 1.5rem;
 }

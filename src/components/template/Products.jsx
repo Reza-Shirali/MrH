@@ -24,6 +24,9 @@ function ProductsPage() {
           {products.length > 0 ? (
             products.map((product, index) => (
               <li key={index} className={styles.product}>
+                {product.features && product.features.length > 0 ? null : (
+                  <div className={styles.non_existent}>ناموجود</div>
+                )}
                 <img
                   className={styles.image__product_title}
                   src={product.images[0].image_link}
