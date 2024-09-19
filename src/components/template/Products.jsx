@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { REACT_APP_API_URL } from "../../services/apiData.js";
-import CircleLoader from "react-spinners/CircleLoader";
+import { REACT_APP_API_URL, currentPage } from "../../services/apiData.js";
+import Pagination from "../modules/Pagination.jsx";
 
 import styles from "../template/product.module.css";
+
+import CircleLoader from "react-spinners/CircleLoader";
 
 import { BsCart } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
@@ -16,6 +18,10 @@ function ProductsPage() {
       setProducts(res.data.data.products.data);
     });
   }, []);
+  const add = () => {
+    currentPage + 1;
+    console.log(currentPage);
+  };
 
   return (
     <div className={styles.container}>
@@ -70,6 +76,8 @@ function ProductsPage() {
           )}
         </ul>
       </div>
+      <Pagination products={products} currentPage={currentPage} />
+      <button onClick={add}>+</button>
     </div>
   );
 }
