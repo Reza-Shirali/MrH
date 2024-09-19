@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { REACT_APP_API_URL, currentPage } from "../../services/apiData.js";
+import { REACT_APP_API_URL} from "../../services/apiData.js";
 import Pagination from "../modules/Pagination.jsx";
 
 import styles from "../template/product.module.css";
@@ -12,15 +12,15 @@ import { FaRegEye } from "react-icons/fa";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
-  console.log(products);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    axios.get(REACT_APP_API_URL).then((res) => {
+    axios.get(REACT_APP_API_URL(page)).then((res) => {
       setProducts(res.data.data.products.data);
     });
-  }, []);
-  const add = () => {
-    currentPage + 1;
-    console.log(currentPage);
+  }, [page]);
+  const changePageHandler = (click) => {
+    setPage(click);
   };
 
   return (
@@ -76,8 +76,11 @@ function ProductsPage() {
           )}
         </ul>
       </div>
-      <Pagination products={products} currentPage={currentPage} />
-      <button onClick={add}>+</button>
+      <Pagination
+        page={page}
+        setPage={setPage}
+        changePageHandler={changePageHandler}
+      />
     </div>
   );
 }
