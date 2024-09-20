@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { REACT_APP_API_URL} from "../../services/apiData.js";
+import { REACT_APP_API_URL } from "../../services/apiData.js";
 import Pagination from "../modules/Pagination.jsx";
-
+import RangePrice from "../modules/RangePrice.jsx";
 import styles from "../template/product.module.css";
 
 import CircleLoader from "react-spinners/CircleLoader";
@@ -24,64 +24,67 @@ function ProductsPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.container__products}>
-        <ul className={styles.list}>
-          {products.length > 0 ? (
-            products.map((product, index) => (
-              <li key={index} className={styles.product}>
-                {product.features && product.features.length > 0 ? null : (
-                  <div className={styles.non_existent}>ناموجود</div>
-                )}
-                <img
-                  className={styles.image__product_title}
-                  src={product.images[0].image_link}
-                  alt={product.name || "Product Image"}
+    <>
+      <div className={styles.container}>
+        <RangePrice/>
+        <div className={styles.container__products}>
+          <ul className={styles.list}>
+            {products.length > 0 ? (
+              products.map((product, index) => (
+                <li key={index} className={styles.product}>
+                  {product.features && product.features.length > 0 ? null : (
+                    <div className={styles.non_existent}>ناموجود</div>
+                  )}
+                  <img
+                    className={styles.image__product_title}
+                    src={product.images[0].image_link}
+                    alt={product.name || "Product Image"}
+                  />
+                  <p>{product.name}</p>
+                  <div className={styles.product__info}>
+                    <div>
+                      {product.features && product.features.length > 0 ? (
+                        <div className={styles.add__product}>
+                          <BsCart />
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className={styles.show__product}>
+                      <FaRegEye />
+                    </div>
+                    <div className={styles.product__price}>
+                      <span>
+                        {product.features && product.features.length > 0
+                          ? Number(product.features[0].price).toLocaleString(
+                              "fa-IR"
+                            ) + " تومان"
+                          : "ناموجود"}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <div className={styles.loading}>
+                <CircleLoader
+                  color="#33ebec"
+                  size={150}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                  className={styles.loader}
                 />
-                <p>{product.name}</p>
-                <div className={styles.product__info}>
-                  <div>
-                    {product.features && product.features.length > 0 ? (
-                      <div className={styles.add__product}>
-                        <BsCart />
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className={styles.show__product}>
-                    <FaRegEye />
-                  </div>
-                  <div className={styles.product__price}>
-                    <span>
-                      {product.features && product.features.length > 0
-                        ? Number(product.features[0].price).toLocaleString(
-                            "fa-IR"
-                          ) + " تومان"
-                        : "ناموجود"}
-                    </span>
-                  </div>
-                </div>
-              </li>
-            ))
-          ) : (
-            <div className={styles.loading}>
-              <CircleLoader
-                color="#33ebec"
-                size={150}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-                className={styles.loader}
-              />
-              <span>در حال بارگذاری...</span>
-            </div>
-          )}
-        </ul>
+                <span>در حال بارگذاری...</span>
+              </div>
+            )}
+          </ul>
+        </div>
       </div>
       <Pagination
         page={page}
         setPage={setPage}
         changePageHandler={changePageHandler}
       />
-    </div>
+    </>
   );
 }
 
