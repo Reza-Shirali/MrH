@@ -1,0 +1,11 @@
+.wrapper__range {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  color: var(--text-color);
+}
+
+.range__title   {
+    color: #fff;
+}

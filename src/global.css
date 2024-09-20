@@ -29,3 +29,12 @@ body {
   margin: 0 auto;
   background-color: #17141f;
 }
+.MuiSlider-root{
+  width: 100% !important;
+  color: var(--text-color) !important;
+}
+.css-14gyywz-MuiSlider-valueLabel{
+  font-size: 1.4rem !important;
+  color: #000 !important;
+  background-color: var(--text-color) !important;
+}
