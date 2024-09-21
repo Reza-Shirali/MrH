@@ -18,6 +18,7 @@ function ProductsPage() {
   const [priceRange, setPriceRange] = useState([0, 15000000]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [productCart, setProductCart] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -58,15 +59,25 @@ function ProductsPage() {
     setPriceRange(newRange);
   };
 
-  console.log(products);
   const addCartHandler = (id) => {
-    const newItemCart = products.filter((product) => {
-      if (product.product_id === id) {
-        return product;
-      }
-    });
-    console.log(newItemCart);
+    const selectedProduct = products.find(
+      (product) => product.product_id === id
+    );
+
+    if (selectedProduct) {
+      setProductCart((prevCart) => {
+        const isAlreadyInCart = prevCart.some(
+          (product) => product.product_id === selectedProduct.product_id
+        );
+        if (!isAlreadyInCart) {
+          return [...prevCart, selectedProduct];
+        }
+        return prevCart;
+      });
+    }
   };
+
+  console.log(productCart);
 
   return (
     <>
@@ -93,7 +104,6 @@ function ProductsPage() {
             <ul className={styles.list}>
               {filteredProducts.map((product) => (
                 <li key={product.product_id} className={styles.product}>
-                  {" "}
                   {product.features && product.features.length > 0 ? null : (
                     <div className={styles.non_existent}>ناموجود</div>
                   )}
@@ -143,6 +153,20 @@ function ProductsPage() {
           )}
         </div>
       </div>
+
+      {/* سبد خرید */}
+      <div className={styles.cart}>
+        <h2>سبد خرید</h2>
+        <ul>
+          {productCart.map((product) => (
+            <li key={product.product_id}>
+              {product.name} -{" "}
+              {Number(product.features[0].price).toLocaleString("fa-IR")} تومان
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <Pagination
         page={page}
         setPage={setPage}
