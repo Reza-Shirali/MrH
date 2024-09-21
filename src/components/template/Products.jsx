@@ -11,14 +11,13 @@ import styles from "../template/product.module.css";
 import { BsCart } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
 
-function ProductsPage() {
+function ProductsPage({productCart , setProductCart}) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 15000000]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [productCart, setProductCart] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -121,8 +120,8 @@ function ProductsPage() {
                     <div>
                       {product.features && product.features.length > 0 ? (
                         <div
-                          className={styles.add__product}
-                          onClick={() => addCartHandler(product.product_id)}
+                        className={styles.add__product}
+                        onClick={() => addCartHandler(product.product_id)}
                         >
                           <BsCart />
                         </div>
@@ -153,20 +152,6 @@ function ProductsPage() {
           )}
         </div>
       </div>
-
-      {/* سبد خرید */}
-      <div className={styles.cart}>
-        <h2>سبد خرید</h2>
-        <ul>
-          {productCart.map((product) => (
-            <li key={product.product_id}>
-              {product.name} -{" "}
-              {Number(product.features[0].price).toLocaleString("fa-IR")} تومان
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <Pagination
         page={page}
         setPage={setPage}

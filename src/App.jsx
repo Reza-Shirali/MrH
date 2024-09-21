@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./components/template/HomePage";
 import Layout from "./layouts/Layout";
@@ -12,9 +13,10 @@ import ContactUs from "./components/template/ContactUs";
 import ShoppingCart from "./components/template/ShoppingCart";
 
 function App() {
+  const [productCart, setProductCart] = useState([]);
   return (
     <BrowserRouter>
-      <Layout>
+      <Layout productCart={productCart}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/account" element={<Account />} />
@@ -22,7 +24,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/terms-and-conditions" element={<Trems />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/products" element={<Products productCart={productCart} setProductCart={setProductCart} />} />
           <Route path="/contact-us" from element={<ContactUs />} />
           <Route path="/shopping-cart" element={<ShoppingCart />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -17,7 +17,7 @@ import logoProduct from "../assets/images/products.webp";
 import { LuHome } from "react-icons/lu";
 import hammer from "../assets/images/terms.webp";
 
-function Layout({ children }) {
+function Layout({ children, productCart }) {
   const navBarItems = [
     { id: 1, titleFa: "صفحه اصلی", titleEn: "HOME", icon: <LuHome /> },
     {
@@ -63,6 +63,7 @@ function Layout({ children }) {
             </Link>
           </div>
           <Link to="/shopping-cart" className={styles.shopping__basket}>
+            <p className={productCart.length ? styles.shopping__cart_number : styles.dis}>{productCart.length}</p>
             <SlBasket className={styles.icon} />
             <span>سبد خرید</span>
           </Link>
