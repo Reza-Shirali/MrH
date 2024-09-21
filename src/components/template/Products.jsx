@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import { REACT_APP_API_URL } from "../../services/apiData.js";
 import Pagination from "../modules/Pagination.jsx";
 import RangePrice from "../modules/RangePrice.jsx";
-import styles from "../template/product.module.css";
+
 import CircleLoader from "react-spinners/CircleLoader";
+
+import styles from "../template/product.module.css";
+
 import { BsCart } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
 
@@ -47,14 +50,22 @@ function ProductsPage() {
     });
   };
 
-  console.log("Filtered Products:", filteredProducts);
-
   const changePageHandler = (click) => {
     setPage(click);
   };
 
   const handlePriceChange = (newRange) => {
     setPriceRange(newRange);
+  };
+
+  console.log(products);
+  const addCartHandler = (id) => {
+    const newItemCart = products.filter((product) => {
+      if (product.product_id === id) {
+        return product;
+      }
+    });
+    console.log(newItemCart);
   };
 
   return (
@@ -81,7 +92,8 @@ function ProductsPage() {
           ) : filteredProducts.length > 0 ? (
             <ul className={styles.list}>
               {filteredProducts.map((product) => (
-                <li key={product.id || product.name} className={styles.product}>
+                <li key={product.product_id} className={styles.product}>
+                  {" "}
                   {product.features && product.features.length > 0 ? null : (
                     <div className={styles.non_existent}>ناموجود</div>
                   )}
@@ -98,7 +110,10 @@ function ProductsPage() {
                   <div className={styles.product__info}>
                     <div>
                       {product.features && product.features.length > 0 ? (
-                        <div className={styles.add__product}>
+                        <div
+                          className={styles.add__product}
+                          onClick={() => addCartHandler(product.product_id)}
+                        >
                           <BsCart />
                         </div>
                       ) : (

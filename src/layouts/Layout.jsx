@@ -62,7 +62,7 @@ function Layout({ children }) {
               <span>حساب کاربری</span>
             </Link>
           </div>
-          <Link to="/shopping-card" className={styles.shopping__basket}>
+          <Link to="/shopping-cart" className={styles.shopping__basket}>
             <SlBasket className={styles.icon} />
             <span>سبد خرید</span>
           </Link>
