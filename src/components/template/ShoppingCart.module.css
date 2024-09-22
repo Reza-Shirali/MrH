@@ -194,9 +194,18 @@
   padding: 0 0.8rem;
   width: 45rem;
 }
-.total__caption{
-    text-align: start;
-    width: 45rem;
-    color: #cbcacb;
-    font-size: 1.6rem;
+.total__caption {
+  text-align: start;
+  width: 45rem;
+  color: #cbcacb;
+  font-size: 1.6rem;
+}
+.np__product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+  font-size: 3rem;
+  color: #cbcacb;
 }

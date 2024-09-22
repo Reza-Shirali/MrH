@@ -36,7 +36,7 @@ function App() {
           <Route path="/contact-us" from element={<ContactUs />} />
           <Route
             path="/shopping-cart"
-            element={<ShoppingCart productCart={productCart} />}
+            element={<ShoppingCart productCart={productCart} setProductCartLayout={setProductCart} />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
