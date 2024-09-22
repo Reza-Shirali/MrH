@@ -24,9 +24,20 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/terms-and-conditions" element={<Trems />} />
-          <Route path="/products" element={<Products productCart={productCart} setProductCart={setProductCart} />} />
+          <Route
+            path="/products"
+            element={
+              <Products
+                productCart={productCart}
+                setProductCart={setProductCart}
+              />
+            }
+          />
           <Route path="/contact-us" from element={<ContactUs />} />
-          <Route path="/shopping-cart" element={<ShoppingCart />} />
+          <Route
+            path="/shopping-cart"
+            element={<ShoppingCart productCart={productCart} />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
