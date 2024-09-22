@@ -99,7 +99,7 @@ function ProductsPage({ productCart, setProductCart }) {
             <div className={styles.error}>
               <p>{error}</p>
             </div>
-          ) : filteredProducts.length > 0 ? (
+          ) : products.length > 0 ? (
             <ul className={styles.list}>
               {products.map((product) => (
                 <li key={product.product_id} className={styles.product}>
