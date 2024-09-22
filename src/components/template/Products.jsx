@@ -11,7 +11,7 @@ import styles from "../template/product.module.css";
 import { BsCart } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
 
-function ProductsPage({productCart , setProductCart}) {
+function ProductsPage({ productCart, setProductCart }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -101,7 +101,7 @@ function ProductsPage({productCart , setProductCart}) {
             </div>
           ) : filteredProducts.length > 0 ? (
             <ul className={styles.list}>
-              {filteredProducts.map((product) => (
+              {products.map((product) => (
                 <li key={product.product_id} className={styles.product}>
                   {product.features && product.features.length > 0 ? null : (
                     <div className={styles.non_existent}>ناموجود</div>
@@ -120,14 +120,12 @@ function ProductsPage({productCart , setProductCart}) {
                     <div>
                       {product.features && product.features.length > 0 ? (
                         <div
-                        className={styles.add__product}
-                        onClick={() => addCartHandler(product.product_id)}
+                          className={styles.add__product}
+                          onClick={() => addCartHandler(product.product_id)}
                         >
                           <BsCart />
                         </div>
-                      ) : (
-                        <p>محصولی وجود ندارد</p>
-                      )}
+                      ) : null}
                     </div>
                     <div className={styles.show__product}>
                       <FaRegEye />
