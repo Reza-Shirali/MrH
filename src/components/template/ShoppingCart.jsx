@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./ShoppingCart.module.css";
 
@@ -46,7 +46,33 @@ function ShoppingCart({ productCart }) {
               );
             })}
           </ul>
-          <div className={styles.wrapper__total_price}>s</div>
+          <div className={styles.wrapper__total_price}>
+            <div className={styles.total__box}>
+              <div className={styles.total__price}>
+                <p>جمع کل کالاها</p>
+                <span>{totalPrice.toLocaleString("fa-IR")} تومان</span>
+              </div>
+              <div className={styles.total__offer}>
+                <p>تخفیف کل کالا ها</p>
+                <span>0 تومان</span>
+              </div>
+              <div className={styles.total__price_final}>
+                <h3>جمع سبد خرید</h3>
+                <p>{totalPrice.toLocaleString("fa-IR")} تومان</p>
+              </div>
+              <button className={styles.continue__buy}>
+                ادامه فرآیند خرید
+              </button>
+              <span className={styles.caption}>
+                هزینه‌ی ارسال در ادامه بر اساس آدرس، زمان و نحوه‌ی ارسال انتخابی
+                شما‌ محاسبه و به این مبلغ اضافه خواهد شد
+              </span>
+            </div>
+            <p className={styles.total__caption}>
+              کالاهای موجود در سبد شما ثبت و رزرو نشده‌اند، برای ثبت سفارش مراحل
+              بعدی را تکمیل کنید.
+            </p>
+          </div>
         </div>
       </div>
     </>
