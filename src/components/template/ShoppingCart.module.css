@@ -1,4 +1,116 @@
-.container__shopping_cart{
-    padding: 1rem 2rem;
-    color: #fff;
+.container__shopping_cart {
+  padding: 1rem 2rem;
+  color: #fff;
+}
+.container__shopping_cart h3 {
+  padding-right: 3rem;
+}
+.wrapper__itemCart {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 0.8rem;
+  width: 100%;
+}
+.wrapper__itemCart li {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  padding: 2rem 3rem;
+  height: 100%;
+  border: 0.2rem solid var(--text-color);
+  border-radius: 4rem;
+  -webkit-border-radius: 4rem;
+  -moz-border-radius: 4rem;
+  -ms-border-radius: 4rem;
+  -o-border-radius: 4rem;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 0.3rem 0.8rem #c9c9c9;
+  margin-bottom: 3rem;
+}
+.wrapper__itemCart li img {
+  max-width: 9rem;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  margin-left: 2rem;
+}
+.product__cart_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+.product__cart_name {
+  color: #cbcacb;
+  font-size: 1.8rem;
+  user-select: none;
+}
+.product__cart_price {
+  color: #cbcacb;
+  font-weight: 900;
+  user-select: none;
+}
+.wrapper__product_cart {
+  width: 70%;
+  margin-top: 1.2rem;
+}
+.wrapper__info_caption {
+  margin-bottom: 9.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper__number_of {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.numbers {
+  border: 0.2rem solid var(--text-color);
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10rem;
+  color: #cbcacb;
+  margin-left: 1.4rem;
+}
+.plus,
+.mines {
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.8rem;
+  cursor: pointer;
+  transition: all 450ms ease 20ms;
+  -webkit-transition: all 450ms ease 20ms;
+  -moz-transition: all 450ms ease 20ms;
+  -ms-transition: all 450ms ease 20ms;
+  -o-transition: all 450ms ease 20ms;
+}
+.plus:hover,
+.mines:hover {
+  background-color: var(--text-color);
+  color: #000;
+}
+.delete_item {
+  color: #cbcacb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 250ms ease-in 20ms;
+  -webkit-transition: all 250ms ease-in 20ms;
+  -moz-transition: all 250ms ease-in 20ms;
+  -ms-transition: all 250ms ease-in 20ms;
+  -o-transition: all 250ms ease-in 20ms;
+}
+.delete_item:hover {
+  color: #fff;
 }

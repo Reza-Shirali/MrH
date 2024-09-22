@@ -32,9 +32,9 @@ function ShoppingCart({ productCart }) {
                     </div>
                     <div className={styles.wrapper__number_of}>
                       <div className={styles.numbers}>
-                        <span>+</span>
-                        <span>2</span>
-                        <span>-</span>
+                        <span className={styles.plus}>+</span>
+                        <span className={styles.show}>2</span>
+                        <span className={styles.mines}>-</span>
                       </div>
                       <div className={styles.delete_item}>
                         <FaRegTrashAlt />
@@ -46,7 +46,7 @@ function ShoppingCart({ productCart }) {
               );
             })}
           </ul>
-          <div className={styles.wrapper__total_price}></div>
+          <div className={styles.wrapper__total_price}>s</div>
         </div>
       </div>
     </>
