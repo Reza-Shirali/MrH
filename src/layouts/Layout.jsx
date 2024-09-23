@@ -10,12 +10,22 @@ import { BsFillBasket2Fill } from "react-icons/bs";
 import { FiPhoneCall } from "react-icons/fi";
 import { LuUsers } from "react-icons/lu";
 import { IoNewspaperSharp } from "react-icons/io5";
+import { IoCall } from "react-icons/io5";
+import { MdSmartphone } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaTelegramPlane } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaShareAlt } from "react-icons/fa";
+import Enamad from "../assets/images/enamad.png";
+import imageFooter from "../assets/images/footerBG.webp";
 
 import styles from "./Layout.module.css";
 import logo from "../assets/images/logo.png";
 import logoProduct from "../assets/images/products.webp";
 import { LuHome } from "react-icons/lu";
 import hammer from "../assets/images/terms.webp";
+import { IoCartOutline } from "react-icons/io5";
+import { IoLink } from "react-icons/io5";
 
 function Layout({ children, productCart }) {
   const navBarItems = [
@@ -63,7 +73,13 @@ function Layout({ children, productCart }) {
             </Link>
           </div>
           <Link to="/shopping-cart" className={styles.shopping__basket}>
-            <p className={productCart.length ? styles.shopping__cart_number : styles.dis}>{productCart.length}</p>
+            <p
+              className={
+                productCart.length ? styles.shopping__cart_number : styles.dis
+              }
+            >
+              {productCart.length}
+            </p>
             <SlBasket className={styles.icon} />
             <span>سبد خرید</span>
           </Link>
@@ -82,7 +98,90 @@ function Layout({ children, productCart }) {
         <NavBar navBarItems={navBarItems} />
       </div>
       <main>{children}</main>
-      <footer className={styles.footer}>{/* Add footer content here */}</footer>
+      <footer
+        className={styles.wrapper__footer}
+        style={{
+          background: `url(${imageFooter})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundColor: "",
+        }}
+      >
+        <div className={styles.footer}>
+          <div className={styles.footer__title}>
+            <IoCartOutline className={styles.footer__title_icon} />
+            <h2>خرید اکشن فیگور</h2>
+          </div>
+          <div className={styles.footer__main}>
+            <div className={styles.footer__one}>
+              <div className={styles.footer__one_title}>
+                <IoLink />
+                <p>لینک سریع</p>
+              </div>
+              <div className={styles.footer__one_items}>
+                <Link to="/">صفحه اصلی</Link>
+                <Link to="/products">اکشن فیگور</Link>
+                <Link to="/products">فیگور های انیمه </Link>
+                <Link to="/products">فیگور های غیر انیمه </Link>
+                <Link to="/products">اکسسوری های کلکسیونی </Link>
+                <Link to="/articles">مقالات </Link>
+                <Link to="/contact-us">تماس با ما </Link>
+                <Link to="/terms-and-conditions">قوانین و مقررات </Link>
+              </div>
+            </div>
+            <div className={`${styles.footer__one} ${styles.footer__one_option}`}>
+              <div className={styles.footer__one_title}>
+                <IoCall />
+                <p>ارتباط با ما</p>
+              </div>
+              <div className={styles.footer__one_items}>
+                <div className={styles.item__one}>
+                  <MdSmartphone />
+                  <span>09010313531</span>
+                </div>
+                <div className={styles.item__one}>
+                  <MdSmartphone />
+                  <span>09010313531</span>
+                </div>
+              </div>
+              <div className={styles.footer__one_caption}>
+                <p>
+                  استان البرز ، کرج-عظیمیه-میدان مهران-برج ماندگار-طبقه منفی 3
+                  واحد 13
+                </p>
+              </div>
+            </div>
+            <div className={`${styles.footer__one} ${styles.footer__one_option}`}>
+              <div className={styles.footer__one_title_last}>
+                <FaShareAlt />
+                <p>شبکه های اجتماعی</p>
+              </div>
+              <div className={styles.footer__one_items}>
+                <FaWhatsapp className={styles.social__media} />
+                <FaTelegramPlane className={styles.social__media} />
+                <FaInstagram className={styles.social__media} />
+              </div>
+            </div>
+            <div className={styles.footer__last}>
+              <img src={logo} alt="logoFooter" />
+              <div className={styles.etemad}>
+                <div className={styles.etemad__two}>
+                  <img
+                    src="https://cdn.zarinpal.com/badges/trustLogo/1.svg"
+                    alt=""
+                  />
+                </div>
+                <div className={styles.etemad__two}>
+                  <img
+                    src={Enamad}
+                    className={styles.enamad__img}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
