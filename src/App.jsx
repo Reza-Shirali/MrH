@@ -13,6 +13,7 @@ import ContactUs from "./components/template/ContactUs";
 import ShoppingCart from "./components/template/ShoppingCart";
 import Login from "./components/modules/Login";
 import Verify from "./components/modules/Verify";
+import Panel from "./components/template/Panel";
 
 function App() {
   const [productCart, setProductCart] = useState([]);
@@ -22,7 +23,8 @@ function App() {
       <Layout productCart={productCart}>
         <Routes>
           <Route path="/account" element={<Login />} />
-          <Route path="Verify" element={<Verify />} />
+          <Route path="/Verify" element={<Verify />} />
+          <Route path="/user-panel" element={<Panel/>}/>
           <Route path="/" element={<HomePage />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/store" element={<Store />} />

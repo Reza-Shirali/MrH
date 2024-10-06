@@ -29,9 +29,8 @@ import { LuHome } from "react-icons/lu";
 function Layout({ children, productCart }) {
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState(false); // برای کنترل نمایش dropdown
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Use useEffect to get user info from localStorage
   useEffect(() => {
     const storedName = localStorage.getItem("name");
     const storedLastName = localStorage.getItem("lastName");
@@ -43,11 +42,9 @@ function Layout({ children, productCart }) {
   }, []);
 
   const handleLogout = () => {
-    // اطلاعات کاربر را از localStorage حذف کن
     localStorage.removeItem("name");
     localStorage.removeItem("lastName");
     localStorage.removeItem("token");
-    // وضعیت نام و فامیل را خالی کن
     setName("");
     setLastName("");
   };
