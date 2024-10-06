@@ -1,0 +1,16 @@
+.header__panel {
+  padding: 2rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: aqua;
+  font-weight: 900;
+  font-size: 2rem;
+  user-select: none;
+  cursor: pointer;
+}
+.icon {
+  font-size: 4rem;
+  color: aqua;
+  margin-left: 1rem;
+}

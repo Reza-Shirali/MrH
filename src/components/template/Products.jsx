@@ -3,22 +3,28 @@ import React, { useEffect, useState } from "react";
 import { REACT_APP_API_URL } from "../../services/apiData.js";
 import Pagination from "../modules/Pagination.jsx";
 import RangePrice from "../modules/RangePrice.jsx";
-
 import CircleLoader from "react-spinners/CircleLoader";
-
+import { useNavigate } from "react-router-dom"; // برای هدایت به صفحه لاگین
 import styles from "../template/product.module.css";
-
 import { BsCart } from "react-icons/bs";
-import { FaRegEye } from "react-icons/fa";
+import { IoHeart } from "react-icons/io5";
 
-function ProductsPage({ productCart, setProductCart }) {
+function ProductsPage({
+  productCart,
+  setProductCart,
+  isFav,
+  setIsFav,
+  isFirstTime,
+  setIsFirstTime,
+}) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 15000000]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -76,6 +82,27 @@ function ProductsPage({ productCart, setProductCart }) {
     }
   };
 
+  const addFavHandler = (id) => {
+    if (!isLoggedIn) {
+      navigate("/account");
+    } else {
+      const selectedProduct = products.find(
+        (product) => product.product_id === id
+      );
+      if (selectedProduct) {
+        setIsFav((prevFav) => {
+          const isAlreadyFav = prevFav.some(
+            (product) => product.product_id === selectedProduct.product_id
+          );
+          if (!isAlreadyFav) {
+            return [...prevFav, selectedProduct];
+          }
+          return prevFav;
+        });
+      }
+    }
+  };
+
   console.log(productCart);
 
   return (
@@ -127,8 +154,11 @@ function ProductsPage({ productCart, setProductCart }) {
                         </div>
                       ) : null}
                     </div>
-                    <div className={styles.show__product}>
-                      <FaRegEye />
+                    <div
+                      className={styles.show__product}
+                      onClick={() => addFavHandler(product.product_id)} // اضافه کردن به علاقه‌مندی‌ها
+                    >
+                      <IoHeart />
                     </div>
                     <div className={styles.product__price}>
                       <span>

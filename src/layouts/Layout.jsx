@@ -26,9 +26,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { IoLink } from "react-icons/io5";
 import { LuHome } from "react-icons/lu";
 
-function Layout({ children, productCart }) {
-  const [name, setName] = useState("");
-  const [lastname, setLastName] = useState("");
+function Layout({ children, productCart , name ,setName , lastname , setLastName }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -42,6 +40,7 @@ function Layout({ children, productCart }) {
   }, []);
 
   const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("name");
     localStorage.removeItem("lastName");
     localStorage.removeItem("token");
@@ -94,7 +93,7 @@ function Layout({ children, productCart }) {
               onClick={() => setDropdownOpen(!dropdownOpen)}
             >
               <div className={styles.wrapper__name__lastName}>
-                <FaUser className={styles.icon} />
+                <LuHome className={styles.icon} />
                 <span className={styles.name_lastName}>
                   {name} {lastname}
                 </span>

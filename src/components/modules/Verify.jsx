@@ -3,14 +3,14 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../modules/Verify.module.css";
 
-const Verify = () => {
+const Verify = ({ isFirstTime, setIsFirstTime }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
-  const [isFirstTime, setIsFirstTime] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (location.state && location.state.token) {
@@ -23,10 +23,11 @@ const Verify = () => {
     if (storedName && storedLastName) {
       setName(storedName);
       setLastName(storedLastName);
+      setIsFirstTime(false);
     } else {
       setIsFirstTime(true);
     }
-  }, [location]);
+  }, [location, setIsFirstTime]);
 
   const handleVerify = () => {
     axios
@@ -41,20 +42,28 @@ const Verify = () => {
         console.log("Response Data:", data);
 
         setToken(data);
-        localStorage.setItem("token", data);
-        localStorage.setItem("name", name);
-        localStorage.setItem("lastName", lastname);
+        localStorage.setItem("token", data); 
+        localStorage.setItem("name", name); 
+        localStorage.setItem("lastName", lastname); 
+        localStorage.setItem("isLoggedIn", true); 
 
         navigate("/");
       })
       .catch((error) => {
         console.error(error);
+        setError("تایید ناموفق، لطفاً اطلاعات را بررسی کنید."); 
       });
   };
 
   return (
     <div className="verify">
-      <form className={styles.form__login}>
+      <form
+        className={styles.form__login}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleVerify();
+        }}
+      >
         {isFirstTime && (
           <>
             <label>
@@ -64,6 +73,7 @@ const Verify = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </label>
             <label>
@@ -73,11 +83,11 @@ const Verify = () => {
                 type="text"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
+                required
               />
             </label>
           </>
         )}
-
         <label>
           کد ارسال شده:
           <input
@@ -85,12 +95,11 @@ const Verify = () => {
             type="text"
             value={code}
             onChange={(e) => setCode(e.target.value)}
+            required
           />
         </label>
-
-        <button type="button" onClick={handleVerify}>
-          تایید
-        </button>
+        {error && <p className={styles.error}>{error}</p>}{" "}
+        <button type="submit">تایید</button>
       </form>
     </div>
   );
