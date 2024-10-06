@@ -1,16 +1,70 @@
 .header__panel {
-  padding: 2rem;
+  padding: 2rem 2rem 1rem 2rem;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   color: aqua;
   font-weight: 900;
   font-size: 2rem;
   user-select: none;
   cursor: pointer;
+  border-bottom: 0.1rem solid aqua;
 }
 .icon {
   font-size: 4rem;
   color: aqua;
   margin-left: 1rem;
+}
+.fav__product {
+  margin-top: 4rem;
+  padding: 2rem;
+}
+.wrapper__card_fav {
+  border: 0.1rem solid aqua;
+  border-radius: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-border-radius: 0.8rem;
+  -moz-border-radius: 0.8rem;
+  -ms-border-radius: 0.8rem;
+  -o-border-radius: 0.8rem;
+  padding: 1.5rem;
+  margin-bottom: 1.8rem;
+}
+.wrapper__right_fav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image_fav {
+  max-width: 15rem;
+  border-radius: 0.4rem;
+  -webkit-border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  -ms-border-radius: 0.4rem;
+  -o-border-radius: 0.4rem;
+}
+.name__fav {
+  color: aqua;
+  font-size: 1.8rem;
+  margin-right: 1.5rem;
+}
+.trash_fav {
+  font-size: 4rem;
+  color: red;
+  cursor: pointer;
+  transition: all 250ms ease-in 20ms;
+  -webkit-transition: all 250ms ease-in 20ms;
+  -moz-transition: all 250ms ease-in 20ms;
+  -ms-transition: all 250ms ease-in 20ms;
+  -o-transition: all 250ms ease-in 20ms;
+}
+.trash_fav:hover {
+  color: rgb(228, 129, 129);
+}
+.empty__fav{
+  text-align: center;
+  color: aqua;
+  font-size: 5rem;
 }

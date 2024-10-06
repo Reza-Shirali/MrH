@@ -50,6 +50,8 @@ function App() {
                 setName={setName}
                 lastname={lastname}
                 setLastName={setLastName}
+                isFav={isFav}
+                setIsFav={setIsFav}
               />
             }
           />
