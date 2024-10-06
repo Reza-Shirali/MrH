@@ -29,7 +29,7 @@ function Banner({ imageBanner }) {
       >
         {imageBanner.map((image) => {
           return (
-            <SwiperSlide key={image.id}>
+            <SwiperSlide key={image.id} className="photo">
               <img src={image.img} alt="imageBanner" />
             </SwiperSlide>
           );

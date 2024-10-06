@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/modules/NavBar";
-
 import { Link } from "react-router-dom";
-
 import { FaUser } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
 import { CiSearch } from "react-icons/ci";
@@ -12,22 +10,48 @@ import { LuUsers } from "react-icons/lu";
 import { IoNewspaperSharp } from "react-icons/io5";
 import { IoCall } from "react-icons/io5";
 import { MdSmartphone } from "react-icons/md";
-import { FaWhatsapp } from "react-icons/fa";
-import { FaTelegramPlane } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaShareAlt } from "react-icons/fa";
+import {
+  FaWhatsapp,
+  FaTelegramPlane,
+  FaInstagram,
+  FaShareAlt,
+} from "react-icons/fa";
 import Enamad from "../assets/images/enamad.png";
 import imageFooter from "../assets/images/footerBG.webp";
-
 import styles from "./Layout.module.css";
 import logo from "../assets/images/logo.png";
 import logoProduct from "../assets/images/products.webp";
-import { LuHome } from "react-icons/lu";
 import hammer from "../assets/images/terms.webp";
 import { IoCartOutline } from "react-icons/io5";
 import { IoLink } from "react-icons/io5";
+import { LuHome } from "react-icons/lu";
 
 function Layout({ children, productCart }) {
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false); // برای کنترل نمایش dropdown
+
+  // Use useEffect to get user info from localStorage
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    const storedLastName = localStorage.getItem("lastName");
+
+    if (storedName && storedLastName) {
+      setName(storedName);
+      setLastName(storedLastName);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // اطلاعات کاربر را از localStorage حذف کن
+    localStorage.removeItem("name");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("token");
+    // وضعیت نام و فامیل را خالی کن
+    setName("");
+    setLastName("");
+  };
+
   const navBarItems = [
     { id: 1, titleFa: "صفحه اصلی", titleEn: "HOME", icon: <LuHome /> },
     {
@@ -40,7 +64,7 @@ function Layout({ children, productCart }) {
       id: 3,
       titleFa: "محصولات",
       titleEn: "PRODUCTS",
-      icon: <img src={logoProduct} />,
+      icon: <img src={logoProduct} alt="product" />,
     },
     {
       id: 4,
@@ -59,19 +83,47 @@ function Layout({ children, productCart }) {
       id: 7,
       titleFa: "قوانین و مقررات",
       titleEn: "TERMS AND CONDITIONS",
-      icon: <img src={hammer} />,
+      icon: <img src={hammer} alt="terms" />,
     },
   ];
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.header__right}>
-          <div className={styles.user__account}>
-            <Link to="/account" className={styles.user__account}>
-              <FaUser className={styles.icon} />
-              <span>حساب کاربری</span>
-            </Link>
-          </div>
+          {name && lastname ? (
+            <div
+              className={styles.user__account}
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              <div className={styles.wrapper__name__lastName}>
+                <FaUser className={styles.icon} />
+                <span className={styles.name_lastName}>
+                  {name} {lastname}
+                </span>
+              </div>
+              {dropdownOpen && (
+                <div className={styles.dropdown}>
+                  <Link to="/user-panel" className={styles.dropdown__item}>
+                    ورود به پنل کاربری
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className={styles.dropdown__item}
+                  >
+                    خروج از حساب کاربری
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className={styles.user__account}>
+              <Link to="/account" className={styles.user__account}>
+                <FaUser className={styles.icon} />
+                <span>حساب کاربری</span>
+              </Link>
+            </div>
+          )}
           <Link to="/shopping-cart" className={styles.shopping__basket}>
             <p
               className={
@@ -94,10 +146,13 @@ function Layout({ children, productCart }) {
           </div>
         </div>
       </header>
+
       <div className={styles.nav__bar}>
         <NavBar navBarItems={navBarItems} />
       </div>
+
       <main>{children}</main>
+
       <footer
         className={styles.wrapper__footer}
         style={{
@@ -129,7 +184,9 @@ function Layout({ children, productCart }) {
                 <Link to="/terms-and-conditions">قوانین و مقررات </Link>
               </div>
             </div>
-            <div className={`${styles.footer__one} ${styles.footer__one_option}`}>
+            <div
+              className={`${styles.footer__one} ${styles.footer__one_option}`}
+            >
               <div className={styles.footer__one_title}>
                 <IoCall />
                 <p>ارتباط با ما</p>
@@ -146,12 +203,14 @@ function Layout({ children, productCart }) {
               </div>
               <div className={styles.footer__one_caption}>
                 <p>
-                  استان البرز ، کرج-عظیمیه-میدان مهران-برج ماندگار-طبقه منفی 3
+                  استان البرز، کرج-عظیمیه-میدان مهران-برج ماندگار-طبقه منفی 3
                   واحد 13
                 </p>
               </div>
             </div>
-            <div className={`${styles.footer__one} ${styles.footer__one_option}`}>
+            <div
+              className={`${styles.footer__one} ${styles.footer__one_option}`}
+            >
               <div className={styles.footer__one_title_last}>
                 <FaShareAlt />
                 <p>شبکه های اجتماعی</p>
@@ -175,6 +234,7 @@ function Layout({ children, productCart }) {
                   <img
                     src={Enamad}
                     className={styles.enamad__img}
+                    alt="Enamad"
                   />
                 </div>
               </div>
