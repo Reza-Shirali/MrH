@@ -26,7 +26,16 @@ import { IoCartOutline } from "react-icons/io5";
 import { IoLink } from "react-icons/io5";
 import { LuHome } from "react-icons/lu";
 
-function Layout({ children, productCart , name ,setName , lastname , setLastName }) {
+function Layout({
+  children,
+  productCart,
+  name,
+  setName,
+  lastname,
+  setLastName,
+  totalPrice,
+  setTotalPrice,
+}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -37,13 +46,28 @@ function Layout({ children, productCart , name ,setName , lastname , setLastName
       setName(storedName);
       setLastName(storedLastName);
     }
-  }, []);
+  }, [setName, setLastName]);
+
+  useEffect(() => {
+    const storedTotalPrice = localStorage.getItem("totalPrice");
+    if (storedTotalPrice !== null) {
+      setTotalPrice(Number(storedTotalPrice)); // مقدار ذخیره شده را به عدد تبدیل می‌کنیم
+    } else {
+      setTotalPrice(totalPrice);
+    }
+  }, [setTotalPrice]);
+
+  useEffect(() => {
+    localStorage.setItem("totalPrice", totalPrice);
+  }, [totalPrice]);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("name");
     localStorage.removeItem("lastName");
     localStorage.removeItem("token");
+    localStorage.removeItem("productCount");
+    localStorage.removeItem("totalPrice");
     setName("");
     setLastName("");
   };
@@ -129,7 +153,12 @@ function Layout({ children, productCart , name ,setName , lastname , setLastName
               {productCart.length}
             </p>
             <SlBasket className={styles.icon} />
-            <span>سبد خرید</span>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span>سبد خرید</span>
+              {productCart.length > 0 ? (
+                <span>{totalPrice.toLocaleString()}</span>
+              ) : null}
+            </div>
           </Link>
         </div>
         <Link to="/" className={styles.header__center}>

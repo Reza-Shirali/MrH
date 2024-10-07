@@ -42,16 +42,16 @@ const Verify = ({ isFirstTime, setIsFirstTime }) => {
         console.log("Response Data:", data);
 
         setToken(data);
-        localStorage.setItem("token", data); 
-        localStorage.setItem("name", name); 
-        localStorage.setItem("lastName", lastname); 
-        localStorage.setItem("isLoggedIn", true); 
+        localStorage.setItem("token", data);
+        localStorage.setItem("name", name);
+        localStorage.setItem("lastName", lastname);
+        localStorage.setItem("isLoggedIn", true);
 
         navigate("/");
       })
       .catch((error) => {
         console.error(error);
-        setError("تایید ناموفق، لطفاً اطلاعات را بررسی کنید."); 
+        setError("تایید ناموفق، لطفاً اطلاعات را بررسی کنید.");
       });
   };
 

@@ -1,0 +1,46 @@
+.wrapper__update {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  border: 0.1rem solid aqua;
+  border-radius: 0.8rem;
+  width: 50%;
+  margin: 5% auto;
+  padding: 2rem;
+  -webkit-border-radius: 0.8rem;
+  -moz-border-radius: 0.8rem;
+  -ms-border-radius: 0.8rem;
+  -o-border-radius: 0.8rem;
+}
+.wrapper__card_update {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  width: 90%;
+}
+.wrapper__card_update input {
+  border: 0.1rem solid aqua;
+  border-radius: 0.4rem;
+  width: 100%;
+  -webkit-border-radius: 0.4rem;
+  -moz-border-radius: 0.4rem;
+  -ms-border-radius: 0.4rem;
+  -o-border-radius: 0.4rem;
+  background-color: transparent;
+  padding: 1.6rem 1.2rem;
+  margin: 1.2rem 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: aqua;
+}
+.wrapper__update button {
+  margin-top: 1.8rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logo__update {
+  width: 15rem;
+  margin: 0 auto;
+}

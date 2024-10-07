@@ -5,6 +5,8 @@ import { LuHome } from "react-icons/lu";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+import { MdEdit } from "react-icons/md";
+
 function Panel({ name, lastname, isFav, setIsFav }) {
   const deleteHandlerFav = (productId) => {
     const updatedFavs = isFav.filter((item) => item.product_id !== productId);
@@ -15,9 +17,14 @@ function Panel({ name, lastname, isFav, setIsFav }) {
     <>
       <div className={styles.header__panel}>
         {name} {lastname}
+        <div>
         <Link to="/">
           <LuHome className={styles.icon} />
         </Link>
+        <Link to="/update-profile">
+          <MdEdit className={styles.icon} />
+        </Link>
+        </div>
       </div>
 
       <div className={styles.fav__product}>
@@ -32,10 +39,13 @@ function Panel({ name, lastname, isFav, setIsFav }) {
                 />
                 <span className={styles.name__fav}>{item.name}</span>
               </div>
-              <FaRegTrashAlt
-                className={styles.trash_fav}
-                onClick={() => deleteHandlerFav(item.product_id)}
-              />
+              <div>
+                <FaRegTrashAlt
+                  className={styles.trash_fav}
+                  onClick={() => deleteHandlerFav(item.product_id)}
+                />
+                <MdEdit className={styles.trash_fav} />
+              </div>
             </div>
           ))
         ) : (

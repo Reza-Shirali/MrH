@@ -13,13 +13,22 @@ import ShoppingCart from "./components/template/ShoppingCart";
 import Login from "./components/modules/Login";
 import Verify from "./components/modules/Verify";
 import Panel from "./components/template/Panel";
+import UpdateProfile from "./components/modules/UpdateProfile";
 
 function App() {
   const [productCart, setProductCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
   const [isFirstTime, setIsFirstTime] = useState(false);
   const [isFav, setIsFav] = useState([]);
+  const [numberOfProduct, setNumberOfProduct] = useState(
+    productCart.map(() => 1)
+  );
+  const updateHandler = () => {
+    localStorage.setItem("name", name);
+    localStorage.setItem("lastname", lastname);
+  };
 
   return (
     <BrowserRouter>
@@ -29,6 +38,8 @@ function App() {
         setName={setName}
         lastname={lastname}
         setLastName={setLastName}
+        totalPrice={totalPrice}
+        setTotalPrice={setTotalPrice}
       >
         <Routes>
           <Route path="/account" element={<Login />} />
@@ -52,6 +63,18 @@ function App() {
                 setLastName={setLastName}
                 isFav={isFav}
                 setIsFav={setIsFav}
+              />
+            }
+          />
+          <Route
+            path="/update-profile"
+            element={
+              <UpdateProfile
+                name={name}
+                setName={setName}
+                lastname={lastname}
+                setLastName={setLastName}
+                updateHandler={updateHandler}
               />
             }
           />
@@ -80,6 +103,10 @@ function App() {
               <ShoppingCart
                 productCart={productCart}
                 setProductCartLayout={setProductCart}
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
+                numberOfProduct={numberOfProduct}
+                setNumberOfProduct={setNumberOfProduct}
               />
             }
           />
