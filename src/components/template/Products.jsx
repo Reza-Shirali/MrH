@@ -16,6 +16,9 @@ function ProductsPage({
   setIsFav,
   isFirstTime,
   setIsFirstTime,
+  handleAddToCart,
+  setTotalCartPrice,
+  totalCartPrice
 }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -34,6 +37,7 @@ function ProductsPage({
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
     const storedCart = localStorage.getItem("cart");
+    const storedTotalPrice = localStorage.getItem("totalCartPrice"); 
 
     if (storedProducts) {
       const parsedProducts = JSON.parse(storedProducts);
@@ -42,12 +46,16 @@ function ProductsPage({
       setFilteredProducts(filtered);
       updateLocalStorage(parsedProducts);
     } else {
-      fetchProducts();
+      // fetchProducts();
     }
 
     if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
       setProductCart(parsedCart);
+    }
+
+    if (storedTotalPrice) {
+      setTotalCartPrice(Number(storedTotalPrice));
     }
   }, []);
 
@@ -123,6 +131,8 @@ function ProductsPage({
       (product) => product.product_id === id
     );
     if (selectedProduct) {
+      const productPrice = Number(selectedProduct.features[0]?.price) || 0;
+
       setProductCart((prevCart) => {
         const isAlreadyInCart = prevCart.some(
           (product) => product.product_id === selectedProduct.product_id
@@ -135,6 +145,11 @@ function ProductsPage({
           setTimeout(() => {
             setCartStatus((prevStatus) => ({ ...prevStatus, [id]: false }));
           }, 3000);
+
+          const newTotalPrice = totalCartPrice + productPrice;
+          setTotalCartPrice(newTotalPrice);
+          localStorage.setItem("totalCartPrice", newTotalPrice);
+
           return updatedCart;
         }
         return prevCart;

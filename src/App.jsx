@@ -25,11 +25,13 @@ function App() {
   const [numberOfProduct, setNumberOfProduct] = useState(
     productCart.map(() => 1)
   );
+  const [totalCartPrice, setTotalCartPrice] = useState(0);
+  console.log(totalCartPrice);
   const updateHandler = () => {
     localStorage.setItem("name", name);
     localStorage.setItem("lastname", lastname);
+    localStorage.setItem("totalCartPrice",totalCartPrice)
   };
-
   return (
     <BrowserRouter>
       <Layout
@@ -38,8 +40,10 @@ function App() {
         setName={setName}
         lastname={lastname}
         setLastName={setLastName}
-        totalPrice={totalPrice}
-        setTotalPrice={setTotalPrice}
+        // totalPrice={totalPrice}
+        // setTotalPrice={setTotalPrice}
+        totalCartPrice={totalCartPrice}
+        setTotalCartPrice={setTotalCartPrice}
       >
         <Routes>
           <Route path="/account" element={<Login />} />
@@ -93,6 +97,9 @@ function App() {
                 setIsFav={setIsFav}
                 isFirstTime={isFirstTime}
                 setIsFirstTime={setIsFirstTime}
+                handleAddToCart
+                totalCartPrice={totalCartPrice}
+                setTotalCartPrice={setTotalCartPrice}
               />
             }
           />
@@ -107,6 +114,8 @@ function App() {
                 setTotalPrice={setTotalPrice}
                 numberOfProduct={numberOfProduct}
                 setNumberOfProduct={setNumberOfProduct}
+                totalCartPrice={totalCartPrice}
+                setTotalCartPrice={setTotalCartPrice}
               />
             }
           />

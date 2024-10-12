@@ -33,8 +33,8 @@ function Layout({
   setName,
   lastname,
   setLastName,
-  totalPrice,
-  setTotalPrice,
+  totalCartPrice,
+  setTotalCartPrice,
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -49,17 +49,19 @@ function Layout({
   }, [setName, setLastName]);
 
   useEffect(() => {
-    const storedTotalPrice = localStorage.getItem("totalPrice");
+    const storedTotalPrice = localStorage.getItem("totalCartPrice");
     if (storedTotalPrice !== null) {
-      setTotalPrice(Number(storedTotalPrice)); // مقدار ذخیره شده را به عدد تبدیل می‌کنیم
+      setTotalCartPrice(Number(storedTotalPrice));
     } else {
-      setTotalPrice(totalPrice);
+      setTotalCartPrice(0);
     }
-  }, [setTotalPrice]);
+  }, [setTotalCartPrice]);
 
   useEffect(() => {
-    localStorage.setItem("totalPrice", totalPrice);
-  }, [totalPrice]);
+    localStorage.setItem("totalPrice", totalCartPrice);
+  }, [setTotalCartPrice]);
+
+  console.log(totalCartPrice);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -147,17 +149,15 @@ function Layout({
           <Link to="/shopping-cart" className={styles.shopping__basket}>
             <p
               className={
-                productCart.length ? styles.shopping__cart_number : styles.dis
+                productCart?.length ? styles.shopping__cart_number : styles.dis
               }
             >
-              {productCart.length}
+              {productCart?.length || 0}
             </p>
             <SlBasket className={styles.icon} />
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span>سبد خرید</span>
-              {productCart.length > 0 ? (
-                <span>{totalPrice.toLocaleString()}</span>
-              ) : null}
+              <span>{totalCartPrice?.toLocaleString() || "0"}</span>
             </div>
           </Link>
         </div>
@@ -250,18 +250,10 @@ function Layout({
               <img src={logo} alt="logoFooter" />
               <div className={styles.etemad}>
                 <div className={styles.etemad__two}>
-                  <img
-                    src="https://cdn.zarinpal.com/badges/trustLogo/1.svg"
-                    alt=""
-                  />
+                  <img src={Enamad} alt="enamad" />
+                  <img src={Enamad} alt="samandehi" />
                 </div>
-                <div className={styles.etemad__two}>
-                  <img
-                    src={Enamad}
-                    className={styles.enamad__img}
-                    alt="Enamad"
-                  />
-                </div>
+                <p>تمامی حقوق برای فروشگاه اکشن فیگور محفوظ می باشد</p>
               </div>
             </div>
           </div>

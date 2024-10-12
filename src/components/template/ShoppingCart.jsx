@@ -3,7 +3,12 @@ import styles from "./ShoppingCart.module.css";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
 
-function ShoppingCart({ setProductCartLayout, totalPrice, setTotalPrice }) {
+function ShoppingCart({
+  setProductCartLayout,
+  setTotalCartPrice,
+  totalCartPrice,
+}) {
+  console.log(totalCartPrice);
   const [productCart, setProductCart] = useState([]);
   const [numberOfProduct, setNumberOfProduct] = useState([]);
 
@@ -22,8 +27,9 @@ function ShoppingCart({ setProductCartLayout, totalPrice, setTotalPrice }) {
         sum + Number(product.features[0].price) * numberOfProduct[index],
       0
     );
-    setTotalPrice(total);
-  }, [productCart, numberOfProduct, setTotalPrice]);
+    setTotalCartPrice(total);
+    localStorage.setItem("totalCartPrice", total);
+  }, [productCart, numberOfProduct, setTotalCartPrice]);
 
   useEffect(() => {
     localStorage.getItem("cart", JSON.stringify(productCart));
@@ -49,11 +55,9 @@ function ShoppingCart({ setProductCartLayout, totalPrice, setTotalPrice }) {
     const updateCart = productCart.filter(
       (product) => product.product_id !== id
     );
-
     setProductCart(updateCart);
     setProductCartLayout(updateCart);
     setNumberOfProduct(updateCart.map(() => 1));
-
     localStorage.setItem("cart", JSON.stringify(updateCart));
   };
 
@@ -115,7 +119,7 @@ function ShoppingCart({ setProductCartLayout, totalPrice, setTotalPrice }) {
               <div className={styles.total__box}>
                 <div className={styles.total__price}>
                   <p>جمع کل کالاها</p>
-                  <span>{totalPrice.toLocaleString("fa-IR")} تومان</span>
+                  <span>{totalCartPrice.toLocaleString("fa-IR")} تومان</span>
                 </div>
                 <div className={styles.total__offer}>
                   <p>تخفیف کل کالا ها</p>
@@ -123,7 +127,7 @@ function ShoppingCart({ setProductCartLayout, totalPrice, setTotalPrice }) {
                 </div>
                 <div className={styles.total__price_final}>
                   <h3>جمع سبد خرید</h3>
-                  <p>{totalPrice.toLocaleString("fa-IR")} تومان</p>
+                  <p>{totalCartPrice.toLocaleString("fa-IR")} تومان</p>
                 </div>
                 <button className={styles.continue__buy}>
                   ادامه فرآیند خرید
