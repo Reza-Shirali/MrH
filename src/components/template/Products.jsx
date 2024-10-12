@@ -28,19 +28,19 @@ function ProductsPage({
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
-    const storedCart = localStorage.getItem("cart"); // بارگذاری سبد خرید
+    const storedCart = localStorage.getItem("cart");
 
     if (storedProducts) {
       const parsedProducts = JSON.parse(storedProducts);
       setProducts(parsedProducts);
       const filtered = filterProductsByPrice(parsedProducts, priceRange);
       setFilteredProducts(filtered);
-      updateLocalStorage(parsedProducts); // به‌روزرسانی local storage
+      updateLocalStorage(parsedProducts);
     } else {
       fetchProducts();
     }
 
-    if (storedCart) { // بارگذاری سبد خرید از localStorage
+    if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
       setProductCart(parsedCart);
     }
@@ -49,33 +49,36 @@ function ProductsPage({
   useEffect(() => {
     if (products.length > 0) {
       localStorage.setItem("products", JSON.stringify(products));
-      updateLocalStorage(products); 
+      updateLocalStorage(products);
     }
   }, [products]);
 
   useEffect(() => {
     const filtered = filterProductsByPrice(products, priceRange);
     setFilteredProducts(filtered);
-    updateLocalStorage(filtered); 
+    updateLocalStorage(filtered);
   }, [products, priceRange]);
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(REACT_APP_API_URL(page));
-      const allProducts = response.data.data.products.data;
-      setProducts(allProducts);
-      localStorage.setItem("products", JSON.stringify(allProducts));
-      const filtered = filterProductsByPrice(allProducts, priceRange);
-      setFilteredProducts(filtered);
-      updateLocalStorage(allProducts);
-    } catch (err) {
-      setError("خطایی در بارگذاری محصولات رخ داد.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get(REACT_APP_API_URL(page));
+        const allProducts = response.data.data.products.data;
+        setProducts(allProducts);
+        localStorage.setItem("products", JSON.stringify(allProducts));
+        const filtered = filterProductsByPrice(allProducts, priceRange);
+        setFilteredProducts(filtered);
+        updateLocalStorage(allProducts);
+      } catch (err) {
+        setError("خطایی در بارگذاری محصولات رخ داد.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, [page, priceRange]);
 
   const filterProductsByPrice = (products, range) => {
     return products.filter((product) => {
@@ -94,7 +97,6 @@ function ProductsPage({
       return sum + price;
     }, 0);
 
-    // Store the total number of products and the total price in localStorage
     localStorage.setItem("totalProducts", totalProducts);
     localStorage.setItem("totalPrice", totalPrice);
   };
@@ -108,18 +110,20 @@ function ProductsPage({
   };
 
   const addCartHandler = (id) => {
-    const selectedProduct = products.find((product) => product.product_id === id);
+    const selectedProduct = products.find(
+      (product) => product.product_id === id
+    );
     if (selectedProduct) {
       setProductCart((prevCart) => {
         const isAlreadyInCart = prevCart.some(
           (product) => product.product_id === selectedProduct.product_id
         );
         if (!isAlreadyInCart) {
-          const updatedCart = [...prevCart, selectedProduct]; // اضافه کردن محصول جدید
-          localStorage.setItem("cart", JSON.stringify(updatedCart)); // به‌روزرسانی localStorage
-          return updatedCart; // برگرداندن سبد خرید به‌روزشده
+          const updatedCart = [...prevCart, selectedProduct];
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          return updatedCart;
         }
-        return prevCart; // برگرداندن سبد خرید قبلی در صورت وجود
+        return prevCart;
       });
     }
   };
@@ -128,7 +132,9 @@ function ProductsPage({
     if (!isLoggedIn) {
       navigate("/account");
     } else {
-      const selectedProduct = products.find((product) => product.product_id === id);
+      const selectedProduct = products.find(
+        (product) => product.product_id === id
+      );
       if (selectedProduct) {
         setIsFav((prevFav) => {
           const isAlreadyFav = prevFav.some(
@@ -200,7 +206,9 @@ function ProductsPage({
                     <div className={styles.product__price}>
                       <span>
                         {product.features && product.features.length > 0
-                          ? Number(product.features[0].price).toLocaleString("fa-IR") + " تومان"
+                          ? Number(product.features[0].price).toLocaleString(
+                              "fa-IR"
+                            ) + " تومان"
                           : "ناموجود"}
                       </span>
                     </div>
