@@ -4,10 +4,10 @@ import { REACT_APP_API_URL } from "../../services/apiData.js";
 import Pagination from "../modules/Pagination.jsx";
 import RangePrice from "../modules/RangePrice.jsx";
 import CircleLoader from "react-spinners/CircleLoader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "../template/product.module.css";
 import { BsCart } from "react-icons/bs";
-import { IoHeart } from "react-icons/io5";
+import { IoHeart, IoCheckmarkSharp } from "react-icons/io5";
 
 function ProductsPage({
   productCart,
@@ -19,12 +19,17 @@ function ProductsPage({
 }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [page, setPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 15000000]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [cartStatus, setCartStatus] = useState({});
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  const initialPage = parseInt(searchParams.get("page")) || 1;
+  const [page, setPage] = useState(initialPage);
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
@@ -80,13 +85,17 @@ function ProductsPage({
     fetchProducts();
   }, [page, priceRange]);
 
+  useEffect(() => {
+    setSearchParams({ page });
+  }, [page, setSearchParams]);
+
   const filterProductsByPrice = (products, range) => {
     return products.filter((product) => {
       if (product.features && product.features.length > 0) {
         const price = Number(product.features[0].price);
         return price >= range[0] && price <= range[1];
       }
-      return false;
+      return true;
     });
   };
 
@@ -121,6 +130,11 @@ function ProductsPage({
         if (!isAlreadyInCart) {
           const updatedCart = [...prevCart, selectedProduct];
           localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+          setCartStatus((prevStatus) => ({ ...prevStatus, [id]: true }));
+          setTimeout(() => {
+            setCartStatus((prevStatus) => ({ ...prevStatus, [id]: false }));
+          }, 3000);
           return updatedCart;
         }
         return prevCart;
@@ -193,7 +207,11 @@ function ProductsPage({
                           className={styles.add__product}
                           onClick={() => addCartHandler(product.product_id)}
                         >
-                          <BsCart />
+                          {cartStatus[product.product_id] ? (
+                            <IoCheckmarkSharp />
+                          ) : (
+                            <BsCart />
+                          )}
                         </div>
                       ) : null}
                     </div>
