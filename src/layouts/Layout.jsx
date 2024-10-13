@@ -35,9 +35,14 @@ function Layout({
   setLastName,
   totalCartPrice,
   setTotalCartPrice,
+  products,
+  filteredSearchProducts,
+  setFilteredSearchProducts,
+  searchHandler,
+  searchTerm,
+  setSearchTerm,
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   useEffect(() => {
     const storedName = localStorage.getItem("name");
     const storedLastName = localStorage.getItem("lastName");
@@ -61,7 +66,9 @@ function Layout({
     localStorage.setItem("totalPrice", totalCartPrice);
   }, [setTotalCartPrice]);
 
-  console.log(totalCartPrice);
+  useEffect(() => {
+    searchHandler();
+  }, [searchTerm, products]);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -166,7 +173,12 @@ function Layout({
         </Link>
         <div className={styles.header__left}>
           <div className={styles.wrapper__search}>
-            <input type="text" placeholder="جست و جوی نام محصول..." />
+            <input
+              type="text"
+              placeholder="جست و جوی نام محصول..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <CiSearch className={styles.icon__search} />
           </div>
         </div>

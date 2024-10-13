@@ -10,18 +10,15 @@ import { BsCart } from "react-icons/bs";
 import { IoHeart, IoCheckmarkSharp } from "react-icons/io5";
 
 function ProductsPage({
-  productCart,
   setProductCart,
-  isFav,
   setIsFav,
-  isFirstTime,
-  setIsFirstTime,
-  handleAddToCart,
   setTotalCartPrice,
-  totalCartPrice
+  totalCartPrice,
+  setFilteredSearchProducts,
+  filteredSearchProducts,
+  products,
+  setProducts
 }) {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 15000000]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -43,7 +40,7 @@ function ProductsPage({
       const parsedProducts = JSON.parse(storedProducts);
       setProducts(parsedProducts);
       const filtered = filterProductsByPrice(parsedProducts, priceRange);
-      setFilteredProducts(filtered);
+      setFilteredSearchProducts(filtered);
       updateLocalStorage(parsedProducts);
     } else {
       // fetchProducts();
@@ -68,7 +65,7 @@ function ProductsPage({
 
   useEffect(() => {
     const filtered = filterProductsByPrice(products, priceRange);
-    setFilteredProducts(filtered);
+    setFilteredSearchProducts(filtered);
     updateLocalStorage(filtered);
   }, [products, priceRange]);
 
@@ -82,7 +79,7 @@ function ProductsPage({
         setProducts(allProducts);
         localStorage.setItem("products", JSON.stringify(allProducts));
         const filtered = filterProductsByPrice(allProducts, priceRange);
-        setFilteredProducts(filtered);
+        setFilteredSearchProducts(filtered);
         updateLocalStorage(allProducts);
       } catch (err) {
         setError("خطایی در بارگذاری محصولات رخ داد.");
@@ -198,9 +195,9 @@ function ProductsPage({
             <div className={styles.error}>
               <p>{error}</p>
             </div>
-          ) : products.length > 0 ? (
+          ) : filteredSearchProducts.length > 0 ? (
             <ul className={styles.list}>
-              {filteredProducts.map((product) => (
+              {filteredSearchProducts.map((product) => (
                 <li key={product.product_id} className={styles.product}>
                   {product.features && product.features.length > 0 ? null : (
                     <div className={styles.non_existent}>ناموجود</div>

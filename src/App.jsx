@@ -16,22 +16,36 @@ import Panel from "./components/template/Panel";
 import UpdateProfile from "./components/modules/UpdateProfile";
 
 function App() {
+  const [products, setProducts] = useState([]);
   const [productCart, setProductCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
   const [isFirstTime, setIsFirstTime] = useState(false);
   const [isFav, setIsFav] = useState([]);
+  const [filteredSearchProducts, setFilteredSearchProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [numberOfProduct, setNumberOfProduct] = useState(
     productCart.map(() => 1)
   );
   const [totalCartPrice, setTotalCartPrice] = useState(0);
-  console.log(totalCartPrice);
   const updateHandler = () => {
     localStorage.setItem("name", name);
     localStorage.setItem("lastname", lastname);
-    localStorage.setItem("totalCartPrice",totalCartPrice)
+    localStorage.setItem("totalCartPrice", totalCartPrice);
   };
+
+  const searchHandler = () => {
+    if (searchTerm.trim() === "") {
+      setFilteredSearchProducts([...products]);
+    } else {
+      const filtered = products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredSearchProducts(filtered);
+    }
+  };
+
   return (
     <BrowserRouter>
       <Layout
@@ -40,10 +54,14 @@ function App() {
         setName={setName}
         lastname={lastname}
         setLastName={setLastName}
-        // totalPrice={totalPrice}
-        // setTotalPrice={setTotalPrice}
         totalCartPrice={totalCartPrice}
         setTotalCartPrice={setTotalCartPrice}
+        filteredSearchProducts={filteredSearchProducts}
+        setFilteredSearchProducts={setFilteredSearchProducts}
+        products={products}
+        searchHandler={searchHandler}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       >
         <Routes>
           <Route path="/account" element={<Login />} />
@@ -100,6 +118,10 @@ function App() {
                 handleAddToCart
                 totalCartPrice={totalCartPrice}
                 setTotalCartPrice={setTotalCartPrice}
+                filteredSearchProducts={filteredSearchProducts}
+                setFilteredSearchProducts={setFilteredSearchProducts}
+                products={products}
+                setProducts={setProducts}
               />
             }
           />
